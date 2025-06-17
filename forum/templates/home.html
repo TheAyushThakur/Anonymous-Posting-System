@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load widget_tweaks humanize %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="card p-4 shadow-sm mb-4">
+        <h4 class="mb-3 text-center">Share your feelings...</h4>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <div class="mb-3">
+                {{ form.message.label_tag }}
+                {{ form.message }}
+                {{ form.message.errors }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.mood.label_tag }}
+                {{ form.mood }}
+                {{ form.mood.errors }}
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </form>
+    </div>
+
+    <h5 class="mb-3">Recent Posts!</h5>
+    {% for post in posts %}
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">
+                {{ post.get_mood_display }} | {{ post.created_at|naturaltime }}
+            </h6>
+            <p class="card-text">{{ post.message|linebreaks }}</p>
+        </div>
+    </div>
+    {% empty %}
+    <p>Nothing to see here, Be the first one to post.</p>
+    {% endfor %}
+</div>
+{% endblock %}
