@@ -11,13 +11,13 @@
 
             <div class="mb-3">
                 {{ form.message.label_tag }}
-                {{ form.message }}
+                {{ form.message|add_class:"form-control" }}
                 {{ form.message.errors }}
             </div>
 
             <div class="mb-3">
                 {{ form.mood.label_tag }}
-                {{ form.mood }}
+                {{ form.mood|add_class:"form-select" }}
                 {{ form.mood.errors }}
             </div>
 
@@ -33,6 +33,14 @@
                 {{ post.get_mood_display }} | {{ post.created_at|naturaltime }}
             </h6>
             <p class="card-text">{{ post.message|linebreaks }}</p>
+
+            <!-- 👍 Like Button -->
+            <form action="{% url 'like_post' post.id %}" method="post" class="mt-2">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-success btn-sm">
+                    👍 Like ({{ post.likes }})
+                </button>
+            </form>
         </div>
     </div>
     {% empty %}
