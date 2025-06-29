@@ -1,5 +1,5 @@
 from django import forms
-from .models import AnonymousPost
+from .models import AnonymousPost, Comment
 
 class PostForm(forms.ModelForm):
     class Meta: 
@@ -12,4 +12,11 @@ class PostForm(forms.ModelForm):
                 'rows': 4,
                 'placeholder': "What's on your mind?",
             }),
+        }
+class CommentForm(forms.ModelForm):
+    class Meta:
+        odel = Comment
+        fields = ['message']
+        widgets = {
+            'message': forms.Textarea(attrs={'rows': 2, 'placeholder': 'Write a comment...'}),
         }
