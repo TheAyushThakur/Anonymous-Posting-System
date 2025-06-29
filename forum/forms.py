@@ -15,7 +15,7 @@ class PostForm(forms.ModelForm):
         }
 class CommentForm(forms.ModelForm):
     class Meta:
-        odel = Comment
+        model = Comment
         fields = ['message']
         widgets = {
             'message': forms.Textarea(attrs={'rows': 2, 'placeholder': 'Write a comment...'}),
