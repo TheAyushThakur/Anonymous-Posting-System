@@ -11,6 +11,5 @@ class PostForm(forms.ModelForm):
                 'class': 'form-control',
                 'rows': 4,
                 'placeholder': "What's on your mind?",
-
             }),
         }
