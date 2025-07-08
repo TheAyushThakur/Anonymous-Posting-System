@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 
 def home(request):
+    form = PostForm()
     if request.method == 'POST':
         if 'submit_post' in request.POST:
             form = PostForm(request.POST)
@@ -27,7 +28,7 @@ def home(request):
                 comment.save()
                 return redirect('home')
     else:
-        form = PostForm()
+       comment_form  = CommentForm()
 
     comment_form = CommentForm()
     posts = AnonymousPost.objects.order_by('-created_at')
@@ -56,7 +57,7 @@ def post_detail(request, post_id):
             comment.post = post
             comment.created_at = timezone.now()
             comment.save()
-            return redirect('post_detail', post_id=post_id)
+            return redirect('home')
     else:
         form = CommentForm()
 

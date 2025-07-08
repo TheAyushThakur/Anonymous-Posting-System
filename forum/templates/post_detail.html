@@ -8,13 +8,6 @@
         <h6 class="text-muted">{{ post.get_mood_display }} | {{ post.created_at|naturaltime }}</h6>
         <p class="fs-5">{{ post.message|linebreaks }}</p>
 
-        <!-- Like Button -->
-        <form action="{% url 'like_post' post.id %}" method="post" class="mt-2">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-outline-success btn-sm">
-                👍 Like ({{ post.likes }})
-            </button>
-        </form>
     </div>
 
     <h5>Comments</h5>
